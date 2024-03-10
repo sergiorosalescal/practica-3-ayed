@@ -98,11 +98,21 @@ double Polynomial::Eval(const double x) const {
 // Comparación si son iguales dos polinomios representados por vectores densos
 bool Polynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  for (int i{0}; i < get_size(); i++) {
-    if (at(i) != pol.at(i))
+  int mayor_tamano = get_size();
+  int menor_tamano = pol.get_size();
+  if (menor_tamano > mayor_tamano) {
+    menor_tamano = get_size();
+    mayor_tamano = pol.get_size();
+  }
+  for (int i{0}; i < mayor_tamano; i++) {
+    if (i > menor_tamano - 1) {
+      break;
+    }
+    if (at(i) != pol.at(i)) {
       differents = true;
       break;
     }
+  }
   return !differents;
 }
 
